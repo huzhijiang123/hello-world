@@ -7,7 +7,7 @@ test pull and some more
 master branch edit
 local change
 modify 6
-
+directly modify
 
 
 modify 5
