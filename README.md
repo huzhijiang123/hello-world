@@ -27,3 +27,4 @@ fork modify
 github fork modify
 
 local tmp branck modify 
+local tmp branck modify --no-ff 
