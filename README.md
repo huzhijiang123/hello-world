@@ -5,6 +5,7 @@ test branch modify
 test modify again
 test pull and some more
 master branch edit
+master branch edit2
 local change
 modify 6
 directly modify
