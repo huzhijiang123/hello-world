@@ -1,0 +1,77 @@
+commit 175e84407c1d62166faa9579abf271806535cdd9
+Author: Zhijiang Hu <hu.zhijiang@zte.com.cn>
+Date:   Fri Apr 8 11:15:39 2016 +0800
+
+    fuel: Normalize wrappers.ssh-agent-credentials.users
+    
+    This changes
+            - ssh-agent-credentials:
+                users: '{ssh-credentials}'
+    
+    to
+            - ssh-agent-credentials:
+                users:
+                    - '{ssh-credentials}'
+    
+    Then, the size of the generated XML can be slightly smaller, such
+    as:
+    
+    Old XML:
+    
+        <com.cloudbees.jenkins.plugins.sshagent.SSHAgentBuildWrapper>
+          <credentialIds>
+            <string>d</string>
+            <string>4</string>
+            <string>2</string>
+            ...
+            <string>b</string>
+            <string>2</string>
+            <string>e</string>
+          </credentialIds>
+        </com.cloudbees.jenkins.plugins.sshagent.SSHAgentBuildWrapper>
+    
+    New XML:
+    
+        <com.cloudbees.jenkins.plugins.sshagent.SSHAgentBuildWrapper>
+          <user>d42411ac011ad6f3dd2e1fa34eaa5d87f910eb2e</user>
+        </com.cloudbees.jenkins.plugins.sshagent.SSHAgentBuildWrapper>
+    
+    Change-Id: I8215a33784c63757a5b74f30a5aa771fc19c5207
+    Signed-off-by: Zhijiang Hu <hu.zhijiang@zte.com.cn>
+
+diff --git a/jjb/fuel/fuel-project-jobs.yml b/jjb/fuel/fuel-project-jobs.yml
+old mode 100644
+new mode 100755
+index d1855f8..0d76820
+--- a/jjb/fuel/fuel-project-jobs.yml
++++ b/jjb/fuel/fuel-project-jobs.yml
+@@ -105,7 +105,8 @@
+ 
+     wrappers:
+         - ssh-agent-credentials:
+-            users: '{ssh-credentials}'
++            users:
++                - '{ssh-credentials}'
+         - timeout:
+             timeout: 360
+             fail: true
+@@ -171,7 +172,8 @@
+ 
+     wrappers:
+         - ssh-agent-credentials:
+-            users: '{ssh-credentials}'
++            users:
++                - '{ssh-credentials}'
+         - timeout:
+             timeout: 360
+             fail: true
+@@ -244,7 +246,8 @@
+ 
+     wrappers:
+         - ssh-agent-credentials:
+-            users: '{ssh-credentials}'
++            users:
++                - '{ssh-credentials}'
+ 
+     triggers:
+         - gerrit:
